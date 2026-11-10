@@ -124,23 +124,28 @@ h2{margin:0;text-align:center;font-size:26px;font-weight:900}
 #gpanel{display:contents}
 .chip{align-self:center}
 .rl{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:4px 2px 16px}
-.rule{display:flex;gap:12px;align-items:center;background:var(--card);border-radius:20px;padding:12px 14px;font-weight:700;line-height:1.35;box-shadow:0 4px 10px rgba(150,60,160,.12),inset 0 1px 0 rgba(255,255,255,.6)}
+.rule{display:flex;gap:12px;align-items:center;background:#fff;color:#4a1d5c;border-radius:20px;padding:12px 14px;font-weight:700;line-height:1.35;box-shadow:0 4px 10px rgba(150,60,160,.12),inset 0 1px 0 rgba(255,255,255,.6)}
 .rule i{font-style:normal;font-size:28px;flex:none;width:38px;text-align:center}
 #rot{position:fixed;inset:0;z-index:300;background:linear-gradient(160deg,#ff9a3d,#ee5fa0);color:#fff;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;font-weight:900;font-size:22px;padding:20px;text-shadow:0 2px 0 rgba(0,0,0,.2)}
 #rot .ph{width:56px;height:96px;border:6px solid #fff;border-radius:14px;position:relative;animation:rotph 2.4s ease-in-out infinite}
 #rot .ph:after{content:"";position:absolute;left:50%;bottom:6px;width:16px;height:4px;margin-left:-8px;background:#fff;border-radius:2px}
 @keyframes rotph{0%,20%{transform:rotate(90deg)}60%,100%{transform:rotate(0)}}
-@media (orientation:landscape) and (pointer:coarse) and (max-height:600px){#rot{display:flex}}
+@media (orientation:landscape) and (pointer:coarse) and (max-height:600px){html:not(.tab) #rot{display:flex}}
+html.rotT #rot{display:flex}
+#rot .rt{display:none}html.tab #rot .rp{display:none}html.tab #rot .rt{display:block}
+html.tab #rot .ph{animation:rotpt 2.4s ease-in-out infinite;width:84px;height:116px}
+@keyframes rotpt{0%,20%{transform:rotate(0)}60%,100%{transform:rotate(90deg)}}
 @media (max-height:700px){.mas img{width:22vw}.mas img:nth-child(2){width:27vw}#menu{gap:12px}.big{padding:14px}}
-@media (min-width:900px) and (min-aspect-ratio:5/4) and (min-height:540px){
- #app{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform:translate(-50%,-50%) scale(var(--sc,1))}
- #game{flex-direction:row;align-items:center;justify-content:center;gap:44px;padding:0}
- #gpanel{display:flex;flex-direction:column;width:390px;gap:22px;padding:26px;border-radius:32px;background:var(--card);box-shadow:0 10px 28px rgba(150,50,160,.25),inset 0 2px 0 rgba(255,255,255,.6)}
- #gpanel .goal{min-height:80px}
- #bwrap{flex:none;width:640px;height:640px}
- .screen:not(#game){left:320px;right:auto;width:640px}
- .lvgrid{grid-template-columns:repeat(5,1fr)}
- .mas img{width:150px;max-width:none}.mas img:nth-child(2){width:190px}
+@media all{
+ html.desk #app{position:absolute;left:50%;top:50%;width:var(--sw,1280px);height:720px;transform:translate(-50%,-50%) scale(var(--sc,1))}
+ html.desk #game{flex-direction:row;align-items:center;justify-content:center;gap:40px;padding:0}
+ html.desk #gpanel{display:flex;flex-direction:column;flex:none;width:380px;height:680px;gap:12px;padding:18px;border-radius:32px;background:var(--card);box-shadow:0 10px 28px rgba(150,50,160,.25),inset 0 2px 0 rgba(255,255,255,.6)}
+ html.desk #gpanel .goal{min-height:64px;padding-top:12px}
+ html.desk #bwrap{flex:none;width:680px;height:680px}
+ html.desk .screen:not(#game){left:calc(50% - 320px);right:auto;width:640px}
+ html.desk .lvgrid{grid-template-columns:repeat(5,1fr)}
+ html.desk .mas img{width:150px;max-width:none}html.desk .mas img:nth-child(2){width:190px}
+ html.desk.pc #menu{transform:scale(1.05)}
 }
 h1 span{-webkit-text-stroke:5px #fff;paint-order:stroke fill}
 #bg{background:radial-gradient(circle at 18% 12%,rgba(255,255,255,.75),transparent 38%),linear-gradient(160deg,var(--bg1),var(--bg2))}
@@ -211,11 +216,11 @@ body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{disp
 .grid .dead{visibility:hidden}
 .grid .j1{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.6),rgba(255,80,160,.6));box-shadow:inset 0 0 0 2px rgba(255,255,255,.75),inset 0 -4px 8px rgba(190,20,100,.4)}
 .grid .j2{background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.5),rgba(200,20,110,.85));box-shadow:inset 0 0 0 3px #fff,inset 0 -4px 8px rgba(120,0,70,.5)}
-@media (max-height:720px) and (max-aspect-ratio:5/4){.round{width:44px;height:44px}.box b{font-size:20px}.box small{font-size:10px}.goal{min-height:48px;padding-top:10px}.gi{width:38px;height:38px}.jar{gap:18px;padding:8px 22px 14px}.bst small{display:none}.bst{padding:6px 4px;font-size:22px}.rainrow{font-size:14px}#game{gap:6px;padding:8px 0}.mas{display:none}}
-@media (max-width:360px) and (max-aspect-ratio:5/4){.gi{width:34px;height:34px}.jar{gap:14px;padding:8px 14px 14px}}
+@media (max-height:720px) and (max-aspect-ratio:6/5){.round{width:44px;height:44px}.box b{font-size:20px}.box small{font-size:10px}.goal{min-height:48px;padding-top:10px}.gi{width:38px;height:38px}.jar{gap:18px;padding:8px 22px 14px}.bst small{display:none}.bst{padding:6px 4px;font-size:22px}.rainrow{font-size:14px}#game{gap:6px;padding:8px 0}.mas{display:none}}
+@media (max-width:360px) and (max-aspect-ratio:6/5){.gi{width:34px;height:34px}.jar{gap:14px;padding:8px 14px 14px}}
 #bg img.fj{position:absolute;top:-100px;opacity:.55;animation:jfall linear infinite;will-change:transform}
 @keyframes jfall{from{transform:translateY(0) rotate(var(--r))}to{transform:translateY(115vh) rotate(calc(var(--r) + 200deg))}}
-@media (max-width:899px),(max-aspect-ratio:5/4),(max-height:539px){#app{width:min(98.7vw,504px)}}
+html:not(.desk) #app{width:min(98.7vw,504px)}
 .abt{gap:12px}
 .abt-t{font-size:36px!important;background:linear-gradient(90deg,#ff5fa2,#ff9a4d,#b07cff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .ver{opacity:.65;font-weight:800}
@@ -241,6 +246,19 @@ body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{disp
 .ab-by{background:var(--card);border-radius:20px;padding:12px;box-shadow:inset 0 2px 6px rgba(120,40,140,.18)}
 .ab-by small{display:block;font-weight:800;opacity:.75}.ab-by b{display:block;font-size:26px;margin-top:2px;color:#e0408a}
 .ab-st{background:var(--card);border-radius:20px;padding:10px 12px}
+.recp,#jarw{display:none}
+#settings{justify-content:center;align-items:center}
+.sl{font-weight:800;opacity:.7;text-align:left;margin-bottom:-6px}
+.ab-box .btn{margin-top:2px}
+@media all{
+ html.desk .recp{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:20px;padding:8px 14px;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 10px rgba(150,60,160,.12)}
+ html.desk .recp .ri{font-size:30px}html.desk .recp small{display:block;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;opacity:.7}html.desk .recp b{font-size:26px}
+ html.desk #jarw{display:block;flex:1;min-height:0;margin-top:14px;position:relative;border-radius:16px 16px 28px 28px;border:4px solid rgba(255,255,255,.85);background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(190,230,255,.4));box-shadow:inset 0 -10px 18px rgba(120,180,255,.3)}
+ html.desk #jarw:before{content:"";position:absolute;left:12%;right:12%;top:-15px;height:13px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#ffb86b,#e8842a)}
+ html.desk #jj{position:absolute;inset:6px 6px 4px;overflow:hidden}
+ html.desk .jy{position:absolute;width:14.2857%;height:20%}html.desk .jy img{width:100%;height:100%;object-fit:contain;display:block}
+ html.desk #card{transform:scale(var(--sc,1))}
+}
 </style>
 </head>
 <body>
@@ -254,7 +272,7 @@ body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{disp
       <button class="btn b-blue" id="bArc">∞ Аркада</button>
       <button class="btn b-green" id="bRules">📖 Правила</button>
       <div class="row"><button class="btn b-purple" id="bSet">⚙ Настройки</button><button class="btn b-orange" id="bAbout">ℹ Об игре</button></div>
-    </div><div class="chip" id="mstat"></div>
+    </div>
     
   </section>
   <section class="screen" id="levels">
@@ -262,11 +280,15 @@ body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{disp
     <div class="lvgrid" id="lvgrid"></div>
   </section>
   <section class="screen" id="settings">
-    <div class="top"><button class="btn round b-purple" data-go="menu">←</button><h2>Настройки</h2><span style="width:52px"></span></div>
-    <div class="set">
-      <button class="btn b-green" id="sSnd"></button><button class="btn b-blue" id="sVib"></button>
-      <button class="btn b-orange" id="sThm"></button><button class="btn b-pink" id="sRst"></button>
-    </div>
+    <div class="acardw"><div class="ab-box">
+      <h2 class="ab-h">НАСТРОЙКИ</h2>
+      <div class="srow"><span>🔊 Звук</span><label class="sw"><input type="checkbox" data-k="snd"><i></i></label></div>
+      <div class="srow"><span>📳 Вибрация</span><label class="sw"><input type="checkbox" data-k="vib"><i></i></label></div>
+      <small class="sl">🎨 Тема оформления</small>
+      <div class="seg"><button data-th="auto">Авто</button><button data-th="light">Светлая</button><button data-th="dark">Тёмная</button></div>
+      <button class="btn b-pink" id="sRst">🗑 Сбросить прогресс</button>
+      <button class="btn b-purple" data-go="menu">НАЗАД</button>
+    </div></div>
   </section>
   <section class="screen" id="rules">
     <div class="top"><button class="btn round b-purple" data-go="menu">←</button><h2>Правила</h2><span style="width:52px"></span></div>
@@ -287,10 +309,10 @@ body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{disp
       <div class="hud" style="flex:1"><div class="box"><small>Очки</small><b id="score">0</b></div><div class="box" id="tbox"><small id="tlab">Время</small><b id="tval">0</b></div></div></div>
     <div class="goal" id="goal"></div>
     <div class="rainrow"><span>🌧️</span><div class="bar"><i id="rainbar"></i></div><span>🍬</span></div>
-    <div id="boost"><button class="btn bst b-orange" id="bHint">💡<small>Подсказка</small><b class="hb" id="hcnt">3</b></button><button class="btn bst b-blue" id="bHam">🔨<small>Молоток</small><b class="hb" id="hmc">2</b></button><button class="btn bst b-purple" id="bShf">🔀<small>Мешать</small><b class="hb" id="sfc">1</b></button></div></div><div id="bwrap"><div id="board"><div id="inner"><div class="grid" id="grid"></div><div id="pieces"></div><div id="rain"></div><canvas id="fx"></canvas><div id="cloud"><i style="left:4%;width:26%;height:56px"></i><i style="left:22%;width:34%;height:76px"></i><i style="left:46%;width:34%;height:70px"></i><i style="left:68%;width:28%;height:56px"></i></div></div><div id="banner"></div></div></div>
+    <div class="recp"><span class="ri">🏆</span><div><small id="recl">Рекорд уровня</small><b id="recv">0</b></div></div><div id="jarw"><div id="jj"></div></div><div id="boost"><button class="btn bst b-orange" id="bHint">💡<small>Подсказка</small><b class="hb" id="hcnt">3</b></button><button class="btn bst b-blue" id="bHam">🔨<small>Молоток</small><b class="hb" id="hmc">2</b></button><button class="btn bst b-purple" id="bShf">🔀<small>Мешать</small><b class="hb" id="sfc">1</b></button></div></div><div id="bwrap"><div id="board"><div id="inner"><div class="grid" id="grid"></div><div id="pieces"></div><div id="rain"></div><canvas id="fx"></canvas><div id="cloud"><i style="left:4%;width:26%;height:56px"></i><i style="left:22%;width:34%;height:76px"></i><i style="left:46%;width:34%;height:70px"></i><i style="left:68%;width:28%;height:56px"></i></div></div><div id="banner"></div></div></div>
   </section>
 </div>
-<div id="rot"><div class="ph"></div><div>Играйте в вертикальном положении</div><small style="opacity:.85;font-weight:700">Поверните телефон</small></div>
+<div id="rot"><div class="ph"></div><div><span class="rp">Играйте в вертикальном положении</span><span class="rt">Играйте в горизонтальном положении</span></div><small style="opacity:.85;font-weight:700"><span class="rp">Поверните телефон</span><span class="rt">Поверните планшет горизонтально</span></small></div>
 <div id="ov" class="hidden"><div id="card"></div></div>
 <script>
 const N=8,RAIN=60;
@@ -331,7 +353,7 @@ const LITE=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2
 const TY=[0,1,2,6,3,4,5],pick=()=>TY[rnd(K)];
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=n=>Math.floor(Math.random()*n);
 /* ---- сохранение и настройки ---- */
-let S={snd:1,vib:1,theme:"auto",unlocked:1,stars:{},best:0};
+let S={snd:1,vib:1,theme:"auto",unlocked:1,stars:{},best:0,lb:{}};
 try{Object.assign(S,JSON.parse(localStorage.getItem("jelly_save")||"{}"))}catch(e){}
 const save=()=>{try{localStorage.setItem("jelly_save",JSON.stringify(S))}catch(e){}};
 let AC;
@@ -340,14 +362,14 @@ const vib=ms=>{if(S.vib&&navigator.vibrate)try{navigator.vibrate(ms)}catch(e){}}
 const click=()=>beep(640,.06,"triangle",.12);
 function applySettings(){
   S.theme=="auto"?document.documentElement.removeAttribute("data-theme"):document.documentElement.dataset.theme=S.theme;
-  $("sSnd").textContent="🔊 Звук: "+(S.snd?"вкл":"выкл");$("sVib").textContent="📳 Вибрация: "+(S.vib?"вкл":"выкл");
-  $("sThm").textContent="🎨 Тема: "+{auto:"авто",light:"светлая",dark:"тёмная"}[S.theme];$("sRst").textContent="🗑 Сбросить прогресс";rst=false;
+  document.querySelectorAll("#settings input[data-k]").forEach(i=>i.checked=!!S[i.dataset.k]);
+  document.querySelectorAll("#settings [data-th]").forEach(b=>b.classList.toggle("on",b.dataset.th==S.theme));
+  $("sRst").textContent="🗑 Сбросить прогресс";rst=false;
 }
 let rst=false;
-$("sSnd").onclick=()=>{S.snd^=1;save();applySettings();click()};
-$("sVib").onclick=()=>{S.vib^=1;save();applySettings();vib(40)};
-$("sThm").onclick=()=>{S.theme={auto:"light",light:"dark",dark:"auto"}[S.theme];save();applySettings();click()};
-$("sRst").onclick=()=>{if(!rst){rst=true;$("sRst").textContent="Точно сбросить? Нажми ещё раз";return}S.unlocked=1;S.stars={};S.best=0;save();applySettings();click()};
+document.querySelectorAll("#settings input[data-k]").forEach(i=>i.onchange=()=>{S[i.dataset.k]=i.checked?1:0;save();i.dataset.k=="vib"?vib(40):click()});
+document.querySelectorAll("#settings [data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;save();applySettings();click()});
+$("sRst").onclick=()=>{if(!rst){rst=true;$("sRst").textContent="Точно сбросить? Нажми ещё раз";return}S.unlocked=1;S.stars={};S.best=0;S.lb={};save();applySettings();click()};
 /* ---- навигация ---- */
 function show(id){document.body.dataset.scene=id=="game"?"play":"menu";document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id==id));if(id=="levels")renderLevels();if(id=="menu")updMenu();if(id=="about")updAbout();if(id!="game"){playing=false}}
 document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{click();show(b.dataset.go)});
@@ -401,7 +423,7 @@ let mode,LVc,lvi,K=6,grid,score,moves,left,jarLeft,busy=true,playing=false,pause
 const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 function bump(id,v){const e=$(id);e.textContent=v;e.classList.remove("bump");e.offsetWidth;e.classList.add("bump")}
 function buildHud(){
-  $("score").textContent=0;$("tbox").classList.remove("low");$("rainbar").style.width="0";updB();
+  updRec();$("score").textContent=0;$("tbox").classList.remove("low");$("rainbar").style.width="0";updB();
   const k=LVc?.kind;
   if(mode=="arcade"){$("tlab").textContent="Ходы";$("tval").textContent=0;$("goal").innerHTML=`<div class="pgoal"><span id="pgt">∞ Аркада · рекорд ${S.best}</span></div>`;return}
   $("tlab").textContent="Время";$("tval").textContent=fmt(left);
@@ -409,8 +431,10 @@ function buildHud(){
     :k=="drop"?`<div class="jar"><div class="gi" id="gid">${svg(7)}<b>${dropLeft}</b></div></div>`
     :`<div class="pgoal"><i id="pg"></i><span id="pgt">${k=="jam"?"🍓 "+jamLeft:"0 / "+LVc.target}</span></div>`;
 }
+function updRec(){const e=$("recv");if(!e)return;const r=mode=="arcade"?S.best:(LVc&&S.lb[LVc.n])||0;e.textContent=Math.max(r,score||0);$("recl").textContent=mode=="arcade"?"Рекорд аркады":"Рекорд уровня"}
+function recSave(){if(mode=="level"){S.lb[LVc.n]=Math.max(S.lb[LVc.n]||0,score);save()}}
 function addScore(n){
-  score+=n;bump("score",score);
+  score+=n;bump("score",score);updRec();
   if(mode=="level"&&LVc.kind=="score"){$("pg").style.width=Math.min(100,score/LVc.target*100)+"%";$("pgt").textContent=Math.min(score,LVc.target)+" / "+LVc.target}
   if(mode=="arcade"){if(score>S.best){S.best=score;save()}$("pgt").textContent="∞ Аркада · рекорд "+S.best}
 }
@@ -418,7 +442,7 @@ function begin(m,i){
   mode=m;lvi=i;LVc=m=="level"?LV[i]:null;K=LVc?LVc.K:7;score=0;moves=0;rainSec=0;paused=false;playing=false;busy=true;sel=null;hammer=false;$("bHam").classList.remove("on");
   hints=m=="level"?3:5;hamL=m=="level"?2:3;shfL=m=="level"?1:2;left=LVc?LVc.time:0;jarLeft={};jamLeft=0;dropLeft=0;
   if(LVc){if(LVc.kind=="jar")LVc.goals.forEach(([t,n])=>jarLeft[t]=n);dropLeft=LVc.drop}
-  show("game");fxSize();newBoard();buildHud();
+  show("game");jarReset();fxSize();newBoard();buildHud();
   if(m=="level"){
     const gl={jar:()=>`<div class="jar" style="align-self:center">${LVc.goals.map(([t,n])=>`<div class="gi">${svg(t)}<b>${n}</b></div>`).join("")}</div>`,score:()=>`<div class="chip">🎯 ${LVc.target}</div>`,jam:()=>`<div class="chip">🍓 ${jamTotal}</div>`,drop:()=>`<div class="chip">🍒 ${LVc.drop}</div>`}[LVc.kind]();
     ov(`<h2>Уровень ${LVc.n}</h2>${gl}<div class="chip">⏱ ${fmt(LVc.time)}</div>`,[["Старт",go]]);
@@ -454,7 +478,7 @@ $("bShf").onclick=async()=>{if(!playing||paused||busy||shfL<=0)return;shfL--;upd
 $("bPause").onclick=pauseMenu;
 /* ---- поле ---- */
 const piecesEl=$("pieces"),inner=$("inner"),gridEl=$("grid");
-let lastActs=[],act,jam,hammer=false,lastSwap=null,jamLeft=0,jamTotal=0,dropLeft=0,hamL=0,shfL=0;
+let SCL=1,jq=0,lastActs=[],act,jam,hammer=false,lastSwap=null,jamLeft=0,jamTotal=0,dropLeft=0,hamL=0,shfL=0;
 const cls=(r,c)=>act[r][c]?(((r+c)%2?"a":"")+(jam[r][c]?" j"+jam[r][c]:"")):"dead";
 function drawGrid(){gridEl.innerHTML=Array.from({length:N*N},(_,i)=>`<div class="${cls(i/N|0,i%N)}"></div>`).join("")}
 function setJam(r,c){gridEl.children[r*N+c].className=cls(r,c)}
@@ -510,7 +534,7 @@ function newBoard(){
   if(!hasMove())newBoard();
 }
 const fxc=$("fx"),fxx=fxc.getContext("2d");let FP=[],FB=[],fraf=0,DPR=1,FW=1;
-function fxSize(){DPR=Math.min(window.devicePixelRatio||1,2);FW=inner.clientWidth||1;fxc.width=FW*DPR;fxc.height=FW*DPR}
+function fxSize(){DPR=Math.min((window.devicePixelRatio||1)*SCL,3);FW=inner.clientWidth||1;fxc.width=FW*DPR;fxc.height=FW*DPR}
 if(window.ResizeObserver)new ResizeObserver(fxSize).observe(inner);
 const fxGo=()=>{if(!fraf)fraf=requestAnimationFrame(fxLoop)};
 function fxBurst(x,y,col,n,sp=1,delay=0){
@@ -564,6 +588,7 @@ function expand(set){
 async function clearSet(set){
   const gone=[...set].filter(p=>{if(p.t==7)return false;if(p.frz){p.frz--;decor(p);return false}if(p.chn){p.chn--;decor(p);return false}return true});
   if(!gone.length){lastActs=[];return}
+  jq+=gone.length;for(let k=0;jq>=2&&k<5;k++){jq-=2;const t=gone[k%gone.length].t;setTimeout(()=>jarAdd(t),k*110)}
   const gain=gone.length*10*combo+(gone.length>3?(gone.length-3)*20:0);addScore(gain);
   const mid=gone[gone.length>>1];floatTxt("+"+gain,mid.r,mid.c);
   if(combo>1)banner(combo>=3?"Супер! ×"+combo:"Комбо ×"+combo+"!",700);else if(gone.length>=5)banner(["Сладко!","Вкуснятина!","Мармеладно!"][rnd(3)],700);
@@ -577,6 +602,16 @@ async function clearSet(set){
   });
   thaw.forEach(q=>{q.frz--;decor(q)});
   await sleep(200+mx);gone.forEach(p=>p.el.remove());
+}
+const JC=7,JR=5;let jh=Array(JC).fill(0);
+function jarReset(){jh=Array(JC).fill(0);jq=0;const j=$("jj");if(j)j.innerHTML=""}
+function jarAdd(t){
+  if(!DESK)return;
+  const open=[];jh.forEach((h,c)=>{if(h<JR)open.push(c)});
+  if(!open.length){const a=$("jj").animate([{opacity:1},{opacity:0}],{duration:450});a.onfinish=jarReset;return}
+  const mn=Math.min(...open.map(c=>jh[c])),cand=open.filter(c=>jh[c]==mn),c=cand[rnd(cand.length)];
+  const d=document.createElement("div");d.className="jy";d.style.cssText=`left:${c*100/JC}%;bottom:${jh[c]*100/JR}%`;d.appendChild(pimg(t,0));$("jj").appendChild(d);jh[c]++;
+  d.animate([{transform:"translateY(-320px) scale(.6)",opacity:0},{transform:"none",opacity:1}],{duration:520,easing:"cubic-bezier(.3,1.4,.5,1)"});
 }
 const cherries=()=>{let n=0;grid.forEach(r=>r.forEach(p=>p&&p.t==7&&n++));return n};
 const newType=top=>dropLeft>cherries()&&top&&Math.random()<.3?7:pick();
@@ -678,14 +713,14 @@ function checkEnd(){
   return false;
 }
 function confetti(){for(let i=0;i<50;i++){const d=document.createElement("i");d.className="cf";d.style.cssText=`left:${rnd(100)}%;background:${rc()};--t:${rr(1.8,3.2)}s;--dx:${rnd(160)-80}px;animation-delay:${Math.random()*.5}s`;document.body.appendChild(d);setTimeout(()=>d.remove(),4000)}}
-function win(){
+function win(){recSave();
   playing=false;const r=left/LVc.time,st=r>=.4?3:r>=.2?2:1;
   S.stars[LVc.n]=Math.max(S.stars[LVc.n]||0,st);S.unlocked=Math.max(S.unlocked,Math.min(LV.length,LVc.n+1));save();
   [523,659,784,1047].forEach((f,i)=>beep(f,.3,"triangle",.15,0,i*.12));vib([80,50,80,50,160]);banner("Победа!",1200);confetti();
   setTimeout(()=>ov(`<h2>Победа!</h2><div class="stars">${"<b>★</b>".repeat(st)}${"★".repeat(3-st)}</div><p>Очки: ${score}</p>`,
     [...(lvi+1<LV.length?[["Дальше ▶",()=>{cov();begin("level",lvi+1)},"b-green"]]:[]),["Заново",()=>begin("level",lvi),"b-blue"],["К уровням",()=>{cov();show("levels")},"b-purple"]]),1100);
 }
-function lose(){
+function lose(){recSave();
   playing=false;[392,330,262].forEach((f,i)=>beep(f,.3,"sawtooth",.1,0,i*.15));vib(200);
   ov(`<h2>Время вышло 😢</h2><p>Цель не выполнена</p>`,[["Ещё раз",()=>begin("level",lvi),"b-green"],["К уровням",()=>{cov();show("levels")},"b-purple"]]);
 }
@@ -697,12 +732,24 @@ setInterval(()=>{
   if(!busy)checkEnd();
 },1000);
 function updAbout(){const st=Object.values(S.stars).reduce((a,b)=>a+b,0),done=Object.keys(S.stars).length;$("astat").innerHTML=`<div class="alab">Твой прогресс</div><div class="agrid"><div><b>${done}/${LV.length}</b><small>уровней</small></div><div><b>⭐ ${st}</b><small>звёзд</small></div><div><b>🏆 ${S.best}</b><small>рекорд аркады</small></div></div>`}
-function updMenu(){const st=Object.values(S.stars).reduce((a,b)=>a+b,0);$("mstat").textContent=`⭐ ${st} / ${LV.length*3}  ·  🏆 ${S.best}`;$("bPlay").innerHTML=`▶ Играть<small>Уровень ${Math.min(S.unlocked,LV.length)} из ${LV.length}</small>`;$("bArc").innerHTML=`∞ Аркада`}
+function updMenu(){const st=Object.values(S.stars).reduce((a,b)=>a+b,0);$("bPlay").innerHTML=`▶ Играть<small>Уровень ${Math.min(S.unlocked,LV.length)} из ${LV.length}</small>`;$("bArc").innerHTML=`∞ Аркада`}
 $("spl").innerHTML=[..."Bojenov"].map((c,i)=>`<span style="--i:${i}">${c}</span>`).join("");
 $("spb").innerHTML=Array.from({length:16},()=>{const z=20+rnd(60);return `<div class="sp-b" style="width:${z}px;height:${z}px;left:${rnd(96)}%;animation-duration:${4+rnd(5)}s;animation-delay:${-rnd(6)}s"></div>`}).join("");
 setTimeout(()=>{$("splash").classList.add("out");setTimeout(()=>$("splash").remove(),700)},2900);
-function fit(){const d=matchMedia("(min-width:900px) and (min-aspect-ratio:5/4) and (min-height:540px)").matches;document.documentElement.style.setProperty("--sc",d?Math.min(innerWidth/1280,innerHeight/720):1)}
-addEventListener("resize",fit);fit();
+let DESK=false;
+function fit(){
+  const d=document.documentElement,r=d.style,iw=innerWidth,ih=innerHeight;
+  const coarse=matchMedia("(pointer:coarse)").matches,short=Math.min(screen.width||iw,screen.height||ih);
+  const tab=coarse&&short>=600,land=iw/ih>=1.2;
+  DESK=land&&(tab||!coarse);
+  d.classList.toggle("tab",tab);d.classList.toggle("desk",DESK);d.classList.toggle("pc",DESK&&!coarse);
+  const was=d.classList.contains("rotT"),rt=tab&&!land;d.classList.toggle("rotT",rt);
+  if(rt&&!was&&playing&&!paused)$("bPause").click();
+  if(DESK){const h=720,M=60,minW=1100+2*M,w=Math.min(Math.max(iw/ih*h,minW),1800);SCL=Math.min(iw/w,ih/h);r.setProperty("--sw",w+"px")}
+  else{SCL=1;r.setProperty("--sw","auto")}
+  r.setProperty("--sc",SCL);fxSize();
+}
+addEventListener("resize",fit);addEventListener("orientationchange",fit);fit();
 matchMedia("(orientation:landscape) and (pointer:coarse) and (max-height:600px)").addEventListener("change",e=>{if(e.matches&&playing&&!paused)$("bPause").click()});
 document.addEventListener("visibilitychange",()=>{if(document.hidden&&playing&&!paused)$("bPause").click()});
 applySettings();updMenu();
