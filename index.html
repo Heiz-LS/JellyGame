@@ -259,6 +259,14 @@ html:not(.desk) #app{width:min(98.7vw,504px)}
  html.desk .jy{position:absolute;width:14.2857%;height:20%}html.desk .jy img{width:100%;height:100%;object-fit:contain;display:block}
  html.desk #card{transform:scale(var(--sc,1))}
 }
+/* скрыть полосы прокрутки (контент по-прежнему прокручивается) */
+.rl,.acardw,.lvgrid{overflow-x:hidden;scrollbar-width:none;-ms-overflow-style:none}
+.rl::-webkit-scrollbar,.acardw::-webkit-scrollbar,.lvgrid::-webkit-scrollbar{display:none;width:0;height:0}
+.acardw{max-width:100%}
+/* телефон: игровое поле и панели выше */
+html:not(.desk) #game{justify-content:flex-start;padding-top:4px;gap:8px}
+html:not(.desk) #bwrap{flex:0 1 auto;width:100%;aspect-ratio:1/1;min-height:0;align-items:flex-start}
+html:not(.desk) #boost{margin-top:4px}
 </style>
 </head>
 <body>
