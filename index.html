@@ -71,7 +71,7 @@ h2{margin:0;text-align:center;font-size:26px;font-weight:900}
 .piece{position:absolute;left:0;top:0;width:12.5%;height:12.5%;transition:transform .24s cubic-bezier(.3,1.25,.5,1);cursor:pointer;z-index:1}
 .piece>img{position:absolute;left:5%;top:4%;width:90%;height:92%;pointer-events:none;user-select:none;-webkit-user-drag:none}
 .piece.sel{z-index:3}.piece.pop{z-index:4}
-.piece.sel>img{animation:selb .55s ease-in-out infinite;filter:drop-shadow(0 0 5px #fff) drop-shadow(0 0 9px #ff5fa2)}
+.piece.sel>img{animation:selb .55s ease-in-out infinite}
 .piece.pop>img{animation:pop .2s ease-in forwards}
 .piece.chg>img{animation:chg .6s cubic-bezier(.3,1.5,.5,1)}
 .piece.hint>img{animation:hint .7s ease-in-out infinite}
@@ -79,8 +79,8 @@ h2{margin:0;text-align:center;font-size:26px;font-weight:900}
 .tw{display:none}
 @keyframes tw{0%,100%{opacity:0;transform:scale(.2) rotate(0)}50%{opacity:1;transform:scale(1) rotate(45deg)}}
 @keyframes selb{0%,100%{transform:scale(1.12)}50%{transform:scale(1.22,1.05)}}
-@keyframes pop{40%{transform:scale(1.3,.8)}100%{transform:scale(0);opacity:0;filter:brightness(2)}}
-@keyframes chg{0%{transform:scale(.1) rotate(-120deg);filter:brightness(2)}100%{transform:scale(1) rotate(0)}}
+@keyframes pop{40%{transform:scale(1.3,.8)}100%{transform:scale(0);opacity:0}}
+@keyframes chg{0%{transform:scale(.1) rotate(-120deg)}100%{transform:scale(1) rotate(0)}}
 @keyframes hint{50%{transform:scale(1.18)}}
 .blob{position:absolute;width:10px;height:10px;border-radius:50%;pointer-events:none;z-index:6;animation:blob .6s ease-out forwards;box-shadow:inset -2px -2px 0 rgba(0,0,0,.15),inset 2px 2px 0 rgba(255,255,255,.6)}
 @keyframes blob{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
@@ -89,7 +89,7 @@ h2{margin:0;text-align:center;font-size:26px;font-weight:900}
 #rain{position:absolute;inset:0;pointer-events:none;overflow:hidden;display:none;z-index:5;background:linear-gradient(rgba(150,120,255,.38),rgba(255,150,220,.14) 60%,transparent);animation:tint 2.1s ease-in-out}
 @keyframes tint{0%{opacity:0}20%,80%{opacity:1}100%{opacity:0}}
 #rain.on{display:block}
-#rain span{position:absolute;top:-30px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;animation:fall var(--t) cubic-bezier(.45,0,.9,.6) forwards;box-shadow:inset -3px -3px 0 rgba(0,0,0,.15),inset 3px 3px 0 rgba(255,255,255,.75)}
+#rain span{position:absolute;top:-30px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;animation:fall var(--t) cubic-bezier(.45,0,.9,.6) forwards;will-change:transform,opacity}
 @keyframes fall{0%{transform:translate(0,0) scale(.6,1.4);opacity:0}10%{opacity:1}85%{transform:translate(var(--dx),var(--h)) rotate(var(--r)) scale(1,1.2);opacity:1}100%{transform:translate(var(--dx),var(--h)) scale(2.2,.2);opacity:0}}
 #cloud{position:absolute;left:-10%;right:-10%;top:-90px;height:80px;z-index:6;pointer-events:none;display:none;filter:drop-shadow(0 8px 6px rgba(70,30,120,.35))}
 #cloud.on{display:block;animation:cl 2.2s ease-in-out forwards}
@@ -158,8 +158,9 @@ h1 span{-webkit-text-stroke:5px #fff;paint-order:stroke fill}
 #bg svg.hills{left:0;top:auto;bottom:0;width:100%;height:24vh;opacity:1;animation:none}
 #bg2{position:fixed;inset:0;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .6s;background:linear-gradient(180deg,#8fe9ff 0%,#6c8cff 45%,#4a2fb0 100%)}
 body[data-scene="play"] #bg2{opacity:1}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #bg2{filter:brightness(.6)}}
-:root[data-theme="dark"] #bg2{filter:brightness(.6)}
+#bg2:after{content:"";position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #bg2:after{opacity:.4}}
+:root[data-theme="dark"] #bg2:after{opacity:.4}
 #bg2 .rays{position:absolute;left:50%;top:-5%;width:220vmax;height:130vmax;margin-left:-110vmax;background:repeating-conic-gradient(from 165deg at 50% 0,rgba(255,255,255,.28) 0 4deg,transparent 4deg 11deg);-webkit-mask-image:linear-gradient(#000,transparent 75%);mask-image:linear-gradient(#000,transparent 75%);transform-origin:50% 0}
 @keyframes sw{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
 #bg2 .bub{position:absolute;bottom:-50px;border-radius:50%;background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.9),rgba(255,255,255,.12) 55%,rgba(255,255,255,.3));border:1.5px solid rgba(255,255,255,.55);animation:bu linear infinite}
@@ -188,7 +189,7 @@ body[data-scene="play"] #bg2{opacity:1}
 .round{position:relative}
 .hb{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 4px;border-radius:11px;background:#5a1f6e;color:#fff;font-size:13px;line-height:18px;border:2px solid #fff;text-align:center}
 .round.dis{filter:grayscale(1);opacity:.55}
-.piece.hint>img{filter:drop-shadow(0 0 6px #ffe45c) drop-shadow(0 0 10px #fff)}
+
 html,body{touch-action:manipulation}body{height:100dvh}
 body[data-scene="play"] #bg{display:none}body:not([data-scene="play"]) #bg2{display:none}
 #bwrap{flex:1;min-height:0;container-type:size;display:flex;align-items:center;justify-content:center}
@@ -267,6 +268,16 @@ html:not(.desk) #app{width:min(98.7vw,504px)}
 html:not(.desk) #game{justify-content:flex-start;padding-top:4px;gap:8px}
 html:not(.desk) #bwrap{flex:0 1 auto;width:100%;aspect-ratio:1/1;min-height:0;align-items:flex-start}
 html:not(.desk) #boost{margin-top:4px}
+/* ---- производительность ---- */
+.piece.sel:before,.piece.hint:before{content:"";position:absolute;inset:2%;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(255,255,255,.95) 0 36%,rgba(255,95,162,.55) 62%,transparent 72%);animation:glow .55s ease-in-out infinite alternate}
+.piece.hint:before{background:radial-gradient(circle,rgba(255,255,255,.95) 0 34%,rgba(255,228,92,.6) 60%,transparent 72%);animation-duration:.7s}
+@keyframes glow{from{opacity:.5}to{opacity:1}}
+.piece>img{will-change:transform;backface-visibility:hidden}
+.fl{text-shadow:0 2px 0 #b02e78}
+/* фон: анимируется только то, что сейчас видно */
+body[data-scene="play"] #bg *{animation-play-state:paused}
+body:not([data-scene="play"]) #bg2 *{animation-play-state:paused}
+body.bgpause *{animation-play-state:paused!important}
 </style>
 </head>
 <body>
@@ -352,11 +363,17 @@ function build(t,v){
   const face=!y?"":`${eye(37,y)}${v==1?`<path d="M56 ${y+1} Q62 ${y-7} 69 ${y+1}" fill="none" stroke="#2a0c24" stroke-width="3.4" stroke-linecap="round"/>`:eye(63,y)}<ellipse cx="27" cy="${y+11}" rx="5.5" ry="3.2" fill="#ff4f86" opacity=".5"/><ellipse cx="73" cy="${y+11}" rx="5.5" ry="3.2" fill="#ff4f86" opacity=".5"/>${v==2?`<path d="M41 ${y+9} Q50 ${y+27} 59 ${y+9}Z" fill="#6e1238"/><ellipse cx="50" cy="${y+19}" rx="5" ry="3.2" fill="#ff7a9a"/>`:`<path d="M42 ${y+10} Q50 ${y+19} 58 ${y+10}" fill="none" stroke="#2a0c24" stroke-width="3.2" stroke-linecap="round"/>`}`;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="g" cx="36%" cy="28%" r="90%"><stop offset="0" stop-color="${l}"/><stop offset=".22" stop-color="${a}"/><stop offset=".75" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></radialGradient><radialGradient id="s"><stop offset="0" stop-color="#3a0a40" stop-opacity=".5"/><stop offset="1" stop-color="#3a0a40" stop-opacity="0"/></radialGradient><linearGradient id="gl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".85"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><filter id="bl" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter><clipPath id="c">${P("")}</clipPath></defs><ellipse cx="50" cy="94" rx="32" ry="6" fill="url(#s)"/><g transform="translate(6 2) scale(.88)">${P(`fill="url(#g)" stroke="${b}" stroke-width="3" stroke-linejoin="round"`)}<g clip-path="url(#c)"><ellipse cx="50" cy="100" rx="48" ry="30" fill="${l}" opacity=".65" filter="url(#bl)"/>${P(`fill="none" stroke="#fff" stroke-width="7" opacity=".42" transform="translate(3.5 3.5)"`)}${P(`fill="none" stroke="${b}" stroke-width="7" opacity=".5" transform="translate(-3.5 -3.5)"`)}</g>${EX[t](l,b)}${face}<g transform="translate(${dx} ${dy})"><ellipse cx="33" cy="27" rx="14" ry="7.5" fill="url(#gl)" transform="rotate(-30 33 27)"/><path d="M19 40 Q20 27 33 20" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".75"/><circle cx="19" cy="48" r="2.6" fill="#fff" opacity=".7"/></g></g>${v!=1?`<path d="M84 12l2.4 6.4 6.4 2.4-6.4 2.4-2.4 6.4-2.4-6.4-6.4-2.4 6.4-2.4z" fill="#fff" opacity=".9"/>`:""}</svg>`;
 }
-const IC={},PRE=[];
-const durl=(t,v)=>{const k=t+"_"+v;return IC[k]||(IC[k]="data:image/svg+xml;utf8,"+encodeURIComponent(t==7?CHERRY:t==8?RAINBOW:build(t,v)))};
-function pimg(t,v){const i=new Image();i.src=durl(t,v);i.draggable=false;i.alt="";return i}
+const IC={},PRE=[],RAS={};
+const svgSrc=(t,v)=>t==7?CHERRY:t==8?RAINBOW:build(t,v);
+const durl=(t,v)=>{if(t>6)v=0;const k=t+"_"+v;return RAS[k]||IC[k]||(IC[k]="data:image/svg+xml;utf8,"+encodeURIComponent(svgSrc(t,v)))};
+function pimg(t,v){const i=new Image();i.onerror=()=>{if(RAS[(t>6?0:v)+""]!==undefined||i.dataset.fb)return;i.dataset.fb=1;i.src="data:image/svg+xml;utf8,"+encodeURIComponent(svgSrc(t,t>6?0:v))};i.src=durl(t,v);i.draggable=false;i.alt="";return i}
+const NSC={};
+function svgNoShadow(t,v=0){const k=t+"_"+v;return NSC[k]||(NSC[k]="data:image/svg+xml;utf8,"+encodeURIComponent(svgSrc(t,v).replace('<ellipse cx="50" cy="94" rx="32" ry="6" fill="url(#s)"/>',"")))}
 function svg(t,v=0){return `<img src="${durl(t,v)}" alt="" draggable="false">`}
-for(let t=0;t<9;t++)for(let v=0;v<(t<7?3:1);v++){const im=new Image();im.src=durl(t,v);PRE.push(im)}
+for(let t=0;t<9;t++)for(let v=0;v<(t<7?3:1);v++){
+  const im=new Image(),k=t+"_"+v;
+  im.onload=()=>{try{const c=document.createElement("canvas");c.width=c.height=256;c.getContext("2d").drawImage(im,0,0,256,256);const u=c.toDataURL("image/png"),T=new Image();T.onload=()=>{RAS[k]=u};T.src=u}catch(e){}};
+  im.src="data:image/svg+xml;utf8,"+encodeURIComponent(svgSrc(t,v).replace("<svg ",'<svg width="256" height="256" '));PRE.push(im)}
 const LITE=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=2;document.body.classList.toggle("lite",LITE);
 const TY=[0,1,2,6,3,4,5],pick=()=>TY[rnd(K)];
 const $=id=>document.getElementById(id),sleep=ms=>new Promise(r=>setTimeout(r,ms)),rnd=n=>Math.floor(Math.random()*n);
@@ -388,7 +405,7 @@ $("logo").innerHTML=[..."Мармеладки"].map((c,i)=>`<span style="--i:${i
 $("mas").innerHTML=svg(0)+svg(6)+svg(1);$("mas2").innerHTML=svg(3)+svg(6)+svg(5);
 const rc=()=>COLORS[rnd(7)][0],rr=(a,b)=>a+Math.random()*(b-a);
 $("bg").innerHTML=Array.from({length:8},()=>`<i class="sprk" style="left:${rnd(100)}%;background:${rc()};animation-duration:${rr(14,26)}s;animation-delay:${-rnd(26)}s;--r:${rnd(360)}deg"></i>`).join("")
-  +Array.from({length:14},(_,i)=>svg([0,6,1,3,4,2,5][i%7]).replace("<img",`<img class="fj" style="left:${3+i*7}%;width:${rr(44,90)}px;height:${rr(44,90)}px;animation-duration:${rr(10,20)}s;animation-delay:${-rnd(20)}s;--r:${rnd(60)-30}deg"`)).join("")
+  +Array.from({length:14},(_,i)=>`<img src="${svgNoShadow([0,6,1,3,4,2,5][i%7])}" alt="" draggable="false">`.replace("<img",`<img class="fj" style="left:${3+i*7}%;width:${rr(44,90)}px;height:${rr(44,90)}px;animation-duration:${rr(10,20)}s;animation-delay:${-rnd(20)}s;--r:${rnd(60)-30}deg"`)).join("")
  +`<svg class="hills" viewBox="0 0 400 120" preserveAspectRatio="none"><path d="M0 70 Q60 20 130 60 T270 55 T400 40 V120 H0Z" fill="rgba(255,255,255,.35)"/><path d="M0 92 Q80 52 160 86 T320 78 T400 84 V120 H0Z" fill="rgba(255,120,190,.4)"/><path d="M0 110 Q100 80 200 104 T400 100 V120 H0Z" fill="rgba(140,90,230,.45)"/></svg>`;
 const jf=c=>`<svg class="jf" viewBox="0 0 100 140"><path d="M8 62 C8 6 92 6 92 62Z" fill="${c}" opacity=".6"/><path d="M20 62 Q24 100 18 132 M38 62 Q42 105 36 138 M56 62 Q60 100 64 134 M74 62 Q72 100 82 126" stroke="${c}" stroke-width="5" fill="none" stroke-linecap="round" opacity=".55"/><ellipse cx="34" cy="30" rx="14" ry="7" fill="#fff" opacity=".6" transform="rotate(-20 34 30)"/></svg>`;
 $("bg2").innerHTML=`<i class="rays"></i>`+Array.from({length:8},()=>{const z=rr(10,34);return `<i class="bub" style="left:${rnd(100)}%;width:${z}px;height:${z}px;animation-duration:${rr(9,18)}s;animation-delay:${-rnd(18)}s;--dx:${rnd(40)-20}px"></i>`}).join("")
@@ -542,7 +559,7 @@ function newBoard(){
   if(!hasMove())newBoard();
 }
 const fxc=$("fx"),fxx=fxc.getContext("2d");let FP=[],FB=[],fraf=0,DPR=1,FW=1;
-function fxSize(){DPR=Math.min((window.devicePixelRatio||1)*SCL,3);FW=inner.clientWidth||1;fxc.width=FW*DPR;fxc.height=FW*DPR}
+function fxSize(){DPR=Math.min((window.devicePixelRatio||1)*SCL,2);FW=inner.clientWidth||1;fxc.width=FW*DPR;fxc.height=FW*DPR}
 if(window.ResizeObserver)new ResizeObserver(fxSize).observe(inner);
 const fxGo=()=>{if(!fraf)fraf=requestAnimationFrame(fxLoop)};
 function fxBurst(x,y,col,n,sp=1,delay=0){
@@ -655,13 +672,14 @@ async function resolve(extra){
     expand(set);keep.forEach(p=>set.delete(p));
     await clearSet(set);
     if(keep.length){banner("Супер-фишка!",700);keep.forEach(p=>fxBurst((p.c+.5)*FW/N,(p.r+.5)*FW/N,null,LITE?10:18,1.6))}
-    keep.forEach(p=>{const m=p.mk;delete p.mk;if(m=="r")setType(p,8);p.sp=m;decor(p);p.el.classList.remove("chg");p.el.offsetWidth;p.el.classList.add("chg")});
+    keep.forEach(p=>{const m=p.mk;delete p.mk;if(m=="r")setType(p,8);p.sp=m;decor(p)});restartAnim(keep,"chg");
     await settle();combo++;
   }
   if(!hasMove()){reshuffle();await sleep(350);if(findRuns().length)await resolve()}
 }
+function restartAnim(ps,cl){ps=ps.filter(Boolean);ps.forEach(p=>p.el.classList.remove(cl));if(ps.length){piecesEl.offsetWidth;ps.forEach(p=>p.el.classList.add(cl))}}
 function clearSel(){if(sel){sel.el.classList.remove("sel");sel=null}}
-function clearHint(){document.querySelectorAll(".hint").forEach(e=>e.classList.remove("hint"))}
+function clearHint(){piecesEl.querySelectorAll(".hint").forEach(e=>e.classList.remove("hint"))}
 function armHint(){clearHint()}
 const nope=p=>{p.el.firstChild.animate([{transform:"translateX(-4px)"},{transform:"translateX(4px)"},{transform:"none"}],{duration:200});beep(180,.1,"square",.07)};
 async function swap(a,b){
@@ -705,7 +723,7 @@ async function rain(){
   const C=$("cloud");C.classList.remove("on");C.offsetWidth;C.classList.add("on");inner.classList.add("rn")
   banner("🌧️ Мармеладный дождь!",2000);[0,.15,.3,.45].forEach((d,i)=>beep(900-i*120,.25,"sine",.1,.7,d));vib([60,40,60]);
   await sleep(1000);
-  grid.flat().forEach(p=>{if(p&&p.t<7&&!p.frz&&Math.random()<.4){let t;do{t=pick()}while(t==p.t);setType(p,t);burst(p);p.el.classList.remove("chg");p.el.offsetWidth;p.el.classList.add("chg")}});
+  {const ch=[];grid.flat().forEach(p=>{if(p&&p.t<7&&!p.frz&&Math.random()<.4){let t;do{t=pick()}while(t==p.t);setType(p,t);burst(p);ch.push(p)}});restartAnim(ch,"chg")}
   await sleep(1000);R.classList.remove("on");inner.classList.remove("rn");$("cloud").classList.remove("on");
   await resolve();busy=false;if(!checkEnd())armHint();
 }
@@ -732,6 +750,7 @@ function lose(){recSave();
   playing=false;[392,330,262].forEach((f,i)=>beep(f,.3,"sawtooth",.1,0,i*.15));vib(200);
   ov(`<h2>Время вышло 😢</h2><p>Цель не выполнена</p>`,[["Ещё раз",()=>begin("level",lvi),"b-green"],["К уровням",()=>{cov();show("levels")},"b-purple"]]);
 }
+document.addEventListener("visibilitychange",()=>{document.body.classList.toggle("bgpause",document.hidden);if(document.hidden&&playing&&!paused){const b=$("bPause");b&&b.click()}});
 setInterval(()=>{
   if(!playing||paused)return;
   if(mode=="level"&&left>0){left--;$("tval").textContent=fmt(left);$("tbox").classList.toggle("low",left<=10)}
